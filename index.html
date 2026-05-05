@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>happy 1st monthsary 🐸</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1f0e;
+    font-family: 'Lora', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  .page {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .page.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  /* FIREFLIES */
+  .firefly {
+    position: fixed;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #c8f07b;
+    pointer-events: none;
+    z-index: 0;
+    animation: fly linear infinite;
+    box-shadow: 0 0 8px 3px #c8f07b88;
+  }
+  @keyframes fly {
+    0%   { transform: translate(0,0) scale(1); opacity:0; }
+    20%  { opacity:1; }
+    80%  { opacity:0.8; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity:0; }
+  }
+
+  /* PAGE 1: INTRO */
+  #p1 { background: radial-gradient(ellipse at 50% 80%, #1a3d1b 0%, #0a1a0a 70%); }
+
+  .pond-bg {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+    background: linear-gradient(180deg, #0d2e2e 0%, #071515 100%);
+    border-radius: 60% 60% 0 0 / 30% 30% 0 0;
+    opacity: 0.85;
+  }
+  .lily-float {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2d6a2d 60%, #1e4a1e 100%);
+    animation: lilybob ease-in-out infinite alternate;
+  }
+  @keyframes lilybob { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+
+  .frog-btn {
+    position: relative; z-index: 10;
+    cursor: pointer;
+    animation: frogbounce 2.5s ease-in-out infinite;
+    transition: transform 0.2s;
+    user-select: none;
+  }
+  .frog-btn:hover { transform: scale(1.15) rotate(-5deg); }
+  @keyframes frogbounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-18px); }
+  }
+
+  .frog-svg { width: 140px; height: 140px; }
+
+  .tap-hint {
+    font-family: 'Caveat', cursive;
+    color: #a8d87a;
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+    opacity: 0.85;
+    animation: pulse 2s ease-in-out infinite;
+    letter-spacing: 0.5px;
+    position: relative; z-index: 10;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  .p1-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: #d4f0a0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative; z-index: 10;
+    text-shadow: 0 0 20px #4a8c2a55;
+  }
+
+  /* PAGE 2: LETTER */
+  #p2 {
+    background: radial-gradient(ellipse at 30% 20%, #0e1e0e 0%, #060d06 100%);
+    padding: 2rem 1rem;
+  }
+  .letter-card {
+    background: #fdf8ef;
+    border-radius: 4px;
+    padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 40px #00000066, 4px 4px 0 #c8b98a;
+    position: relative; z-index: 5;
+    border-left: 6px solid #8fbc5a;
+  }
+  .letter-date {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #8a7a5a;
+    margin-bottom: 1.2rem;
+    text-align: right;
+  }
+  .letter-salutation {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #3a6e1a;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .letter-body {
+    font-family: 'Lora', serif;
+    font-size: clamp(0.88rem, 2.5vw, 0.97rem);
+    color: #3a3020;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    min-height: 80px;
+  }
+  .cursor-blink {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: #3a6e1a;
+    animation: blink 0.8s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 1px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .letter-sign {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: #3a6e1a;
+    margin-top: 1.5rem;
+    text-align: right;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+  .frog-deco {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 1.2rem; top: 1rem;
+    animation: wiggle 3s ease-in-out infinite;
+  }
+  @keyframes wiggle {
+    0%,100%{transform:rotate(-8deg)}
+    50%{transform:rotate(8deg)}
+  }
+
+  /* PAGE 3: MEMORIES */
+  #p3 {
+    background: radial-gradient(ellipse at 70% 30%, #111e0f 0%, #060d06 100%);
+    padding: 2rem 1rem;
+    flex-direction: column;
+  }
+  .mem-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    color: #c8ec88;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative; z-index: 5;
+  }
+  .polaroid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+    max-width: 680px;
+    width: 100%;
+    position: relative; z-index: 5;
+  }
+  .polaroid {
+    background: #f9f4e8;
+    padding: 10px 10px 36px;
+    box-shadow: 3px 3px 15px #00000077, 1px 1px 0 #c8b98a;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .polaroid:nth-child(odd) { transform: rotate(-2deg); }
+  .polaroid:nth-child(even) { transform: rotate(2.5deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.08) !important; box-shadow: 6px 6px 30px #00000099; z-index: 10; }
+
+  .polaroid-img {
+    width: 100%; aspect-ratio: 1;
+    background: linear-gradient(135deg, #d4e8c4 0%, #a8cc78 50%, #7aaa40 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .polaroid-label {
+    font-family: 'Caveat', cursive;
+    font-size: 0.95rem;
+    color: #5a4a2a;
+    text-align: center;
+    margin-top: 6px;
+    position: absolute;
+    bottom: 8px; left: 0; right: 0;
+  }
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px;
+  }
+  .photo-placeholder .ph-icon { font-size: 2rem; }
+  .photo-placeholder .ph-text { font-size: 0.75rem; color: #6a8a4a; font-family: 'Caveat', cursive; text-align: center; padding: 0 4px; }
+
+  /* PAGE 4: ROBLOX */
+  #p4 {
+    background: #080c08;
+    padding: 2rem 1rem;
+    position: relative;
+  }
+  .pixel-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(#1a2a1a22 1px, transparent 1px), linear-gradient(90deg, #1a2a1a22 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .game-card {
+    background: #0f1f0f;
+    border: 2px solid #4a8c2a;
+    border-radius: 8px;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
+    max-width: 500px;
+    width: 100%;
+    position: relative; z-index: 5;
+    box-shadow: 0 0 30px #4a8c2a44, inset 0 0 60px #00100033;
+  }
+  .game-header {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: #8fdc50;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px #4a8c2a88;
+  }
+  .game-sub {
+    font-family: 'Caveat', cursive;
+    color: #5a8c3a;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .player-row {
+    display: flex; gap: 1rem; margin-bottom: 1.2rem;
+    align-items: center;
+  }
+  .player-tag {
+    background: #1a3a1a;
+    border: 1px solid #3a6a2a;
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    flex: 1;
+    text-align: center;
+  }
+  .player-tag .role { font-family: 'Caveat', cursive; font-size: 0.8rem; color: #6aaa4a; }
+  .player-tag .name { font-family: 'Caveat', cursive; font-size: 1.2rem; color: #c8f07b; font-weight: 600; }
+  .heart-sep { font-size: 1.4rem; animation: heartbeat 1.2s ease-in-out infinite; }
+  @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+  .game-stat {
+    background: #0a180a;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid #4a8c2a;
+  }
+  .stat-label { font-family: 'Caveat', cursive; font-size: 0.85rem; color: #5a8a3a; }
+  .stat-val { font-family: 'Caveat', cursive; font-size: 1.1rem; color: #b8e070; }
+  .game-msg {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: #7acc44;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: 1px dashed #3a6a2a;
+    border-radius: 6px;
+    background: #0a180a;
+    line-height: 1.5;
+  }
+
+  /* CONFETTI on last page */
+  .confetti-piece {
+    position: fixed;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    animation: confetti-fall linear forwards;
+    pointer-events: none;
+    z-index: 100;
+  }
+  @keyframes confetti-fall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* NAV DOTS */
+  .nav-dots {
+    position: fixed;
+    right: 16px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 8px;
+    z-index: 999;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #3a5a2a;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .dot.active { background: #8fdc50; transform: scale(1.4); }
+
+  /* NEXT BTN */
+  .next-btn {
+    position: relative; z-index: 10;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: #0d1f0e;
+    background: #8fdc50;
+    border: none;
+    border-radius: 50px;
+    padding: 0.7rem 2rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 0 #4a8c2a;
+  }
+  .next-btn:hover { transform: translateY(-3px); box-shadow: 0 7px 0 #4a8c2a; }
+  .next-btn:active { transform: translateY(1px); box-shadow: 0 2px 0 #4a8c2a; }
+
+  /* ENDING */
+  .ending-wrap {
+    display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 5;
+  }
+  .ending-frog { font-size: 5rem; animation: frogbounce 2.5s ease-in-out infinite; margin-bottom: 1rem; }
+  .ending-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: #c8f07b;
+    text-align: center;
+    text-shadow: 0 0 30px #4a8c2a88;
+    margin-bottom: 0.5rem;
+  }
+  .ending-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: #7aaa50;
+    text-align: center;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .restart-btn {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #4a7a2a;
+    background: transparent;
+    border: 1px dashed #3a6a2a;
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-top: 0.5rem;
+  }
+  .restart-btn:hover { color: #8fdc50; border-color: #6aaa4a; }
+
+  .star { position: fixed; border-radius: 50%; background: white; animation: twinkle ease-in-out infinite; pointer-events: none; }
+  @keyframes twinkle { 0%,100%{opacity:0.2;transform:scale(0.8)} 50%{opacity:1;transform:scale(1.1)} }
+
+  @media (max-width: 480px) {
+    .polaroid-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .nav-dots { right: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<div class="nav-dots" id="navDots">
+  <div class="dot active" onclick="goTo(0)"></div>
+  <div class="dot" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+</div>
+
+<!-- PAGE 1: INTRO -->
+<div class="page active" id="p1">
+  <div class="pond-bg"></div>
+  <div class="lily-float" style="width:80px;height:80px;bottom:32%;left:8%;animation-duration:3.2s"></div>
+  <div class="lily-float" style="width:55px;height:55px;bottom:28%;right:12%;animation-duration:2.7s"></div>
+  <div class="lily-float" style="width:100px;height:100px;bottom:38%;left:35%;animation-duration:4s"></div>
+
+  <p class="p1-title">something for you 🐸</p>
+  <div class="frog-btn" onclick="goTo(1)">
+    <svg class="frog-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="70" cy="85" rx="42" ry="35" fill="#4a9e3a"/>
+      <ellipse cx="70" cy="82" rx="36" ry="30" fill="#5db84a"/>
+      <ellipse cx="70" cy="90" rx="22" ry="18" fill="#a8e078"/>
+      <circle cx="50" cy="58" r="14" fill="#3a8a2a"/>
+      <circle cx="90" cy="58" r="14" fill="#3a8a2a"/>
+      <circle cx="50" cy="58" r="10" fill="#f0f0e0"/>
+      <circle cx="90" cy="58" r="10" fill="#f0f0e0"/>
+      <circle cx="52" cy="56" r="6" fill="#1a1a0a"/>
+      <circle cx="92" cy="56" r="6" fill="#1a1a0a"/>
+      <circle cx="54" cy="54" r="2" fill="white"/>
+      <circle cx="94" cy="54" r="2" fill="white"/>
+      <path d="M58 95 Q70 106 82 95" stroke="#2a6a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="64" cy="74" r="3" fill="#3a8a2a"/>
+      <circle cx="76" cy="74" r="3" fill="#3a8a2a"/>
+      <ellipse cx="30" cy="95" rx="12" ry="7" fill="#4a9e3a" transform="rotate(-20,30,95)"/>
+      <ellipse cx="110" cy="95" rx="12" ry="7" fill="#4a9e3a" transform="rotate(20,110,95)"/>
+      <ellipse cx="42" cy="118" rx="16" ry="8" fill="#4a9e3a" transform="rotate(-10,42,118)"/>
+      <ellipse cx="98" cy="118" rx="16" ry="8" fill="#4a9e3a" transform="rotate(10,98,118)"/>
+      <text x="70" y="90" text-anchor="middle" font-size="14" fill="#e05070">♡</text>
+    </svg>
+  </div>
+  <p class="tap-hint">tap the frog ↑</p>
+</div>
+
+<!-- PAGE 2: LETTER -->
+<div class="page" id="p2">
+  <div class="letter-card">
+    <div class="frog-deco">🐸</div>
+    <div class="letter-date" id="letterDate"></div>
+    <div class="letter-salutation">Para sa iyo, 💚</div>
+    <div class="letter-body" id="letterBody"></div>
+    <div class="letter-sign" id="letterSign">with all my heart, 🐸<br><em style="font-size:1.6rem">ako</em></div>
+  </div>
+  <button class="next-btn" onclick="goTo(2)" id="p2NextBtn" style="display:none">Our Memories →</button>
+</div>
+
+<!-- PAGE 3: MEMORIES -->
+<div class="page" id="p3">
+  <p class="mem-title">our little moments 📸</p>
+  <div class="polaroid-grid">
+    <div class="polaroid">
+      <div class="polaroid-img">
+        <div class="photo-placeholder">
+          <div class="ph-icon">🐸</div>
+          <div class="ph-text">add your photo here!</div>
+        </div>
+      </div>
+      <div class="polaroid-label">day one 🌿</div>
+    </div>
+    <div class="polaroid">
+      <div class="polaroid-img">
+        <div class="photo-placeholder">
+          <div class="ph-icon">🎮</div>
+          <div class="ph-text">roblox nights</div>
+        </div>
+      </div>
+      <div class="polaroid-label">our fave game 💚</div>
+    </div>
+    <div class="polaroid">
+      <div class="polaroid-img">
+        <div class="photo-placeholder">
+          <div class="ph-icon">📱</div>
+          <div class="ph-text">late night calls</div>
+        </div>
+      </div>
+      <div class="polaroid-label">always here ☁️</div>
+    </div>
+    <div class="polaroid">
+      <div class="polaroid-img">
+        <div class="photo-placeholder">
+          <div class="ph-icon">💌</div>
+          <div class="ph-text">every good morning</div>
+        </div>
+      </div>
+      <div class="polaroid-label">gm everyday 🌅</div>
+    </div>
+  </div>
+  <button class="next-btn" onclick="goTo(3)" style="margin-top:1.5rem">Our Game →</button>
+</div>
+
+<!-- PAGE 4: ROBLOX / ENDING -->
+<div class="page" id="p4">
+  <div class="pixel-grid"></div>
+  <div class="game-card">
+    <div class="game-header">🎮 Blair, Roblox</div>
+    <div class="game-sub">where we became us</div>
+    <div class="player-row">
+      <div class="player-tag">
+        <div class="role">player 1</div>
+        <div class="name">me 🐸</div>
+      </div>
+      <div class="heart-sep">💚</div>
+      <div class="player-tag">
+        <div class="role">player 2</div>
+        <div class="name">ikaw ✨</div>
+      </div>
+    </div>
+    <div class="game-stat">
+      <div class="stat-label">status</div>
+      <div class="stat-val">online — together even from far away</div>
+    </div>
+    <div class="game-stat">
+      <div class="stat-label">distance</div>
+      <div class="stat-val">LDR pero parang katabi ka pa rin</div>
+    </div>
+    <div class="game-stat">
+      <div class="stat-label">achievement unlocked</div>
+      <div class="stat-val">🏆 1 month together !!!</div>
+    </div>
+    <div class="game-msg">
+      kahit malayo tayo, every time tayo naglalaro,<br>
+      parang nandito ka na rin. 🐸💚
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <div style="font-family:'Caveat',cursive;font-size:1.6rem;color:#c8f07b;text-shadow:0 0 20px #4a8c2a88;margin-bottom:0.4rem">
+        happy 1st monthsary 💚
+      </div>
+      <div style="font-family:'Lora',serif;font-style:italic;font-size:0.9rem;color:#5a8a3a">
+        here's to many more 🐸
+      </div>
+      <button class="restart-btn" onclick="goTo(0)" style="margin-top:1rem">↩ from the beginning</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const LETTER = `Isang buwan na.
+
+Hindi ko inaasahan na ganito pala ang feeling — yung may taong iniisip mo kahit may ginagawa ka, yung palagi kang ngumingiti sa cellphone kahit mag-isa ka lang.
+
+Masaya ako na nakilala kita. Sa lahat ng tao sa mundo, ikaw yung nandito — at kahit malayo tayo, parang hindi.
+
+Maraming salamat sa bawat "good morning," sa bawat late night na call, sa bawat game natin sa Blair. Hindi ko alam kung alam mo kung gaano ka kahalaga, pero sana maramdaman mo ngayon.
+
+Isa lang ang alam ko — gusto ko pang makilala ka nang mas malalim, araw-araw.
+
+Mahal kita. 🐸`;
+
+  let currentPage = 0;
+  let letterDone = false;
+
+  function goTo(n) {
+    document.querySelectorAll('.page').forEach((p,i) => p.classList.toggle('active', i===n));
+    document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===n));
+    currentPage = n;
+    if (n === 1 && !letterDone) startLetter();
+    if (n === 3) launchConfetti();
+  }
+
+  function startLetter() {
+    const el = document.getElementById('letterBody');
+    const sign = document.getElementById('letterSign');
+    const btn = document.getElementById('p2NextBtn');
+    const date = document.getElementById('letterDate');
+    date.textContent = new Date().toLocaleDateString('en-PH', {year:'numeric',month:'long',day:'numeric'});
+
+    el.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor-blink';
+    el.appendChild(cursor);
+
+    let i = 0;
+    const speed = 28;
+    function type() {
+      if (i < LETTER.length) {
+        el.insertBefore(document.createTextNode(LETTER[i]), cursor);
+        i++;
+        setTimeout(type, LETTER[i-1]==='\n' ? speed*6 : speed);
+      } else {
+        cursor.remove();
+        sign.style.opacity = '1';
+        btn.style.display = 'block';
+        letterDone = true;
+      }
+    }
+    setTimeout(type, 600);
+  }
+
+  function launchConfetti() {
+    const colors = ['#8fdc50','#c8f07b','#4a9e3a','#f0e070','#a8e078','#e8f4c0'];
+    for (let i = 0; i < 60; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;transform:rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4500);
+      }, i * 60);
+    }
+  }
+
+  // Fireflies
+  for (let i = 0; i < 18; i++) {
+    const f = document.createElement('div');
+    f.className = 'firefly';
+    const x = Math.random()*100, y = Math.random()*100;
+    f.style.cssText = `left:${x}vw;top:${y}vh;--dx:${(Math.random()-0.5)*200}px;--dy:${(Math.random()-0.5)*200}px;animation-duration:${5+Math.random()*8}s;animation-delay:${Math.random()*5}s;width:${3+Math.random()*4}px;height:${3+Math.random()*4}px`;
+    document.body.appendChild(f);
+  }
+
+  // Stars background
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = 1 + Math.random()*2;
+    s.style.cssText = `left:${Math.random()*100}vw;top:${Math.random()*100}vh;width:${sz}px;height:${sz}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*3}s`;
+    document.body.appendChild(s);
+  }
+</script>
+</body>
+</html>
